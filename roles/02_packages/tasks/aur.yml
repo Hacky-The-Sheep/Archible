@@ -1,0 +1,10 @@
+---
+- name: Install Yay
+  kewlfft.aur.aur:
+    name: "{{ aur_helper }}"
+
+- name: Install AUR Pkgs
+  kewlfft.aur.aur:
+    name: "{{ aur_packages }}"
+    executable: "{{ aur_helper }}"
+    state: present

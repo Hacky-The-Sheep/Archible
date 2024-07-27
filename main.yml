@@ -1,0 +1,6 @@
+---
+- name: Main
+  hosts: all
+
+  vars_files:
+    - config.yml

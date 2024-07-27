@@ -1,0 +1,31 @@
+---
+#
+# User
+#
+
+user:
+  name: hacky
+  full_name: "Jon"
+  primary_group: users
+  additional_groups: wheel, networkmanager, plugdev, dialout, libvirtd
+  shell: /bin/fish
+  country: "United States"
+
+aur_helper: yay
+
+# Printing
+desktop: gnome
+enable_printing: true
+enable_bluetooth: true
+
+packages:
+  - cups
+  - cups-pdf
+  - fish
+  - kitty
+
+aur_packages:
+  - brlaser-git
+  - microsoft-edge-stable-bin
+  - ttf-iosevka
+  - ttf-iosevka-aile

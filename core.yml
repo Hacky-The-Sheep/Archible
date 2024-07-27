@@ -1,0 +1,74 @@
+---
+- name: Core/Base Install for Arch/Artix
+  hosts: all
+  become: yes
+
+  tasks:
+# Create the AUR User
+  - name: Create the `aur_builder` user
+    become: yes
+    ansible.builtin.user:
+      name: aur_builder
+      create_home: yes
+      group: wheel
+
+  - name: Allow the `aur_builder` user to run `sudo pacman` without a password
+    become: yes
+    ansible.builtin.lineinfile:
+      path: /etc/sudoers.d/11-install-aur_builder
+      line: 'aur_builder ALL=(ALL) NOPASSWD: /usr/bin/pacman'
+      create: yes
+      mode: 0644
+      validate: 'visudo -cf %s'
+
+# Install Packages from Base
+  - name: Install Base Arch Pkgs
+    pacman:
+      update_cache: yes
+      name:
+        - bat
+        - cups
+        - cups-pdf
+        - curl
+        - wget
+        - fish
+        - kitty
+        - go
+        - helix
+        - libreoffice-still
+        - mpv
+        - openvpn
+        - ripgrep
+        - ruff
+        - putty
+        - remmina
+        - yt-dlp
+        - starship
+        - marksman
+        - nmap
+        - fastfetch
+        - hydra
+
+# Install packages from the AUR
+  - name: Install AUR pkgs
+    become: true
+    become_user: aur_builder
+    kewlfft.aur.aur:
+      use: yay
+      name:
+        - brlaser-git
+        - markdown-oxide-git
+        - microsoft-edge-stable-bin
+        - simplex-desktop-appimage
+        - synology-drive
+        - ttf-iosevka
+        - ttf-iosevka-aile
+      state: present
+
+# Change Shell
+  - name: Change to FISH Shell
+    become: yes
+    user:
+      name: "hacky"
+      shell: /bin/fish
+

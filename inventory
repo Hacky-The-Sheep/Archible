@@ -1,0 +1,2 @@
+[all]
+artix ansible_connection=local
