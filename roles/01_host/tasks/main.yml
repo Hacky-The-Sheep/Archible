@@ -1,6 +1,0 @@
----
-- name: Check Distr
-  ansible.builtin.assert:
-    that: ansible_distribution == "Archlinux"
-    fail_msg: "Failed"
-    success_mdg: "I use artix BTW"
