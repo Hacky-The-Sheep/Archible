@@ -4,6 +4,27 @@
   become: yes
 
   tasks:
+
+# Core Applications and Basics
+  - name: The Nucleus
+    ansible.builtin.user:
+      name: "hacky"
+      comment: "Hacky the Sheep"
+      groups:
+        - networkmanager
+        - wheel
+        - plugdev
+        - dialout
+        - libvirtd
+      state: present
+    become: true
+
+# Github 
+  - name: Git Config Username
+    community.general.git_config:
+      name: "Jon"
+      scope: global
+    
 # Create the AUR User
   - name: Create the `aur_builder` user
     become: yes
@@ -30,24 +51,30 @@
         - cups
         - cups-pdf
         - curl
-        - wget
+        - delve
+        - fastfetch
         - fish
-        - kitty
         - go
         - helix
+        - hydra
+        - john
+        - kitty
         - libreoffice-still
+        - lldb
+        - marksman
         - mpv
+        - nmap
+        - openssh
         - openvpn
+        - putty
+        - rhythmbox
+        - remmina
         - ripgrep
         - ruff
-        - putty
-        - remmina
-        - yt-dlp
         - starship
-        - marksman
-        - nmap
-        - fastfetch
-        - hydra
+        - wget
+        - yt-dlp
+        - zellij
 
 # Install packages from the AUR
   - name: Install AUR pkgs
@@ -57,10 +84,17 @@
       use: yay
       name:
         - brlaser-git
+        - catppuccin-gtk-theme-mocha
+        - ffuf-bin
+        - gobuster-bin
+        - golangci-lint-langserver-bin
         - markdown-oxide-git
         - microsoft-edge-stable-bin
+        - rhythmbox-plugin-fileorganizer-git
         - simplex-desktop-appimage
         - synology-drive
+        - ttf-firacode
+        - ttf-firacode-nerd
         - ttf-iosevka
         - ttf-iosevka-aile
       state: present
@@ -71,4 +105,3 @@
     user:
       name: "hacky"
       shell: /bin/fish
-
