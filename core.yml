@@ -10,12 +10,12 @@
     ansible.builtin.user:
       name: "hacky"
       comment: "Hacky the Sheep"
-      groups:
-        - networkmanager
-        - wheel
-        - plugdev
-        - dialout
-        - libvirtd
+      # groups:
+      #   - networkmanager
+      #   - wheel
+      #   - plugdev
+      #   - dialout
+      #   - libvirtd
       state: present
     become: true
 
@@ -64,7 +64,7 @@
         - marksman
         - mpv
         - nmap
-        - openssh
+        - openssh-openrc
         - openvpn
         - putty
         - rhythmbox
@@ -90,7 +90,6 @@
         - golangci-lint-langserver-bin
         - markdown-oxide-git
         - microsoft-edge-stable-bin
-        - rhythmbox-plugin-fileorganizer-git
         - simplex-desktop-appimage
         - synology-drive
         - ttf-firacode
@@ -105,3 +104,11 @@
     user:
       name: "hacky"
       shell: /bin/fish
+
+# Download the dots
+  - name: Clone the dotz
+    git:
+      repo: https://github.com/Hacky-The-Sheep/dotfiles
+      dest: /home/debian/dotz
+      clone: yes
+      update: yes
