@@ -109,6 +109,6 @@
   - name: Clone the dotz
     git:
       repo: https://github.com/Hacky-The-Sheep/dotfiles
-      dest: /home/debian/dotz
+      dest: /home/hacky/dotz
       clone: yes
       update: yes
