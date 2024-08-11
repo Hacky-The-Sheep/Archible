@@ -47,6 +47,7 @@
     pacman:
       update_cache: yes
       name:
+        - audacious
         - bat
         - cups
         - cups-pdf
@@ -67,11 +68,12 @@
         - openssh-openrc
         - openvpn
         - putty
-        - rhythmbox
         - remmina
         - ripgrep
         - ruff
+        - speedtest-cli
         - starship
+        - timeshift
         - wget
         - yt-dlp
         - zellij
