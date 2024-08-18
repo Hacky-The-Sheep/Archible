@@ -9,7 +9,7 @@
   - name: The Nucleus
     ansible.builtin.user:
       name: "hacky"
-      comment: "Hacky the Sheep"
+      comment: "hacky"
       # groups:
       #   - networkmanager
       #   - wheel
@@ -48,7 +48,6 @@
       update_cache: yes
       name:
         - audacious
-        - bat
         - cups
         - cups-pdf
         - curl
@@ -65,7 +64,8 @@
         - marksman
         - mpv
         - nmap
-        - openssh-openrc
+        - net-tools
+        - openssh
         - openvpn
         - putty
         - remmina
@@ -76,6 +76,8 @@
         - timeshift
         - wget
         - yt-dlp
+        - wezterm
+        - wireshark
         - zellij
 
 # Install packages from the AUR
