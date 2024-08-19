@@ -81,6 +81,7 @@
         - yt-dlp
         - wezterm
         - wireshark-qt
+        - yazi
         - zellij
 
 # Install packages from the AUR
