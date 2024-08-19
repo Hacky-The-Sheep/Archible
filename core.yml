@@ -52,8 +52,11 @@
         - cups-pdf
         - curl
         - delve
+        - eza
         - fastfetch
         - fish
+        - gnome-browser-connector
+        - gnome-tweaks
         - go
         - helix
         - hydra
@@ -77,7 +80,7 @@
         - wget
         - yt-dlp
         - wezterm
-        - wireshark
+        - wireshark-qt
         - zellij
 
 # Install packages from the AUR
@@ -112,7 +115,7 @@
 # Download the dots
   - name: Clone the dotz
     git:
-      repo: https://github.com/Hacky-The-Sheep/dotfiles
+      repo: https://github.com/Hacky-The-Sheep/Dots
       dest: /home/hacky/dotz
       clone: yes
       update: yes
