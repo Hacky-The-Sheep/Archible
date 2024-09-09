@@ -96,6 +96,7 @@
     kewlfft.aur.aur:
       use: yay
       name:
+        - brave-bin
         - brlaser-git
         - catppuccin-gtk-theme-mocha
         - ffuf-bin
