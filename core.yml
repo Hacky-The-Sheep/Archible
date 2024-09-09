@@ -118,11 +118,3 @@
     user:
       name: "hacky"
       shell: /bin/fish
-
-# Download the dots
-  - name: Clone the dotz
-    git:
-      repo: https://github.com/Hacky-The-Sheep/Dots
-      dest: /home/hacky/dotz
-      clone: yes
-      update: yes
