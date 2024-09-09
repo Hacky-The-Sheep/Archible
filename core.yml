@@ -6,18 +6,18 @@
   tasks:
 
 # Core Applications and Basics
-  - name: The Nucleus
-    ansible.builtin.user:
-      name: "hacky"
-      comment: "hacky"
-      # groups:
-      #   - networkmanager
-      #   - wheel
-      #   - plugdev
-      #   - dialout
-      #   - libvirtd
-      state: present
-    become: true
+  # - name: The Nucleus
+  #   ansible.builtin.user:
+  #     name: "hacky"
+  #     comment: "hacky"
+  #     # groups:
+  #     #   - networkmanager
+  #     #   - wheel
+  #     #   - plugdev
+  #     #   - dialout
+  #     #   - libvirtd
+  #     state: present
+  #   become: true
 
 # Github 
   - name: Git Config Username
@@ -55,10 +55,10 @@
         - eza
         - fastfetch
         - fish
-        - fragments
         - gnome-browser-connector
         - gnome-tweaks
         - go
+        - grub-btrfs
         - helix
         - hydra
         - john
@@ -72,11 +72,15 @@
         - openssh
         - openvpn
         - putty
+        - qbittorrent
         - remmina
         - ripgrep
         - ruff
+        - signal-desktop
+        - snapper
         - speedtest-cli
         - starship
+        - stow
         - timeshift
         - wget
         - yt-dlp
