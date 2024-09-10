@@ -97,13 +97,12 @@
       use: yay
       name:
         - brave-bin
-        - brlaser-git
-        - catppuccin-gtk-theme-mocha
+        - brlaser
         - ffuf-bin
         - gnome-shell-extension-appindicator-git
         - gnome-shell-extension-wallpaper-slideshow
         - gobuster-bin
-        - golangci-lint-langserver-bin
+        - golangci-lint
         - markdown-oxide-git
         - microsoft-edge-stable-bin
         - simplex-desktop-appimage
