@@ -52,6 +52,7 @@
         - cups-pdf
         - curl
         - delve
+        - dosfstools
         - eza
         - fastfetch
         - fish
@@ -67,8 +68,9 @@
         - lldb
         - marksman
         - mpv
-        - nmap
         - net-tools
+        - nmap        
+        - ntfs-3g
         - openssh
         - openvpn
         - putty
