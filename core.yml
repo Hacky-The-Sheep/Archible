@@ -83,6 +83,7 @@
         - starship
         - stow
         - timeshift
+        - vscode-json-languageserver
         - wget
         - yt-dlp
         - wezterm
