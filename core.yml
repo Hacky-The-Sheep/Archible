@@ -79,7 +79,6 @@
         - ripgrep
         - ruff
         - signal-desktop
-        - snapper
         - speedtest-cli
         - starship
         - stow
