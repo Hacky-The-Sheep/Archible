@@ -1,125 +1,160 @@
 ---
-- name: Core/Base Install for Arch/Artix
+- name: playbook_core.yml - archlinux base setup
   hosts: all
   become: yes
 
   tasks:
 
-# Core Applications and Basics
-  # - name: The Nucleus
-  #   ansible.builtin.user:
-  #     name: "hacky"
-  #     comment: "hacky"
-  #     # groups:
-  #     #   - networkmanager
-  #     #   - wheel
-  #     #   - plugdev
-  #     #   - dialout
-  #     #   - libvirtd
-  #     state: present
-  #   become: true
+# Update Arch
+    - name: update arch
+      pacman:
+        update_cache: yes
+        upgrade: yes
 
-# Github 
-  - name: Git Config Username
-    community.general.git_config:
-      name: "Jon"
-      scope: global
-    
-# Create the AUR User
-  - name: Create the `aur_builder` user
-    become: yes
-    ansible.builtin.user:
-      name: aur_builder
-      create_home: yes
-      group: wheel
+# Install Pkgs
+    - name: Install Base Arch Pkgs
+      pacman:
+        update_cache: yes
+        name:
+          - ansible-language-server
+          - audacious
+          - cups
+          - cups-pdf
+          - curl
+          - delve
+          - dosfstools
+          - eza
+          - fastfetch
+          - fish
+          - gnome-browser-connector
+          - gnome-tweaks
+          - go
+          - grub-btrfs
+          - helix
+          - hydra
+          - john
+          - kitty
+          - libreoffice-still
+          - lldb
+          - marksman
+          - mpv
+          - net-tools
+          - nmap        
+          - ntfs-3g
+          - openssh
+          - openvpn
+          - putty
+          - qbittorrent
+          - remmina
+          - ripgrep
+          - ruff
+          - signal-desktop
+          - speedtest-cli
+          - starship
+          - stow
+          - timeshift
+          - tldr
+          - vscode-json-languageserver
+          - wget
+          - yaml-language-server
+          - yt-dlp
+          - wezterm
+          - wireshark-qt
+          - yazi
+          - zellij
 
-  - name: Allow the `aur_builder` user to run `sudo pacman` without a password
-    become: yes
-    ansible.builtin.lineinfile:
-      path: /etc/sudoers.d/11-install-aur_builder
-      line: 'aur_builder ALL=(ALL) NOPASSWD: /usr/bin/pacman'
-      create: yes
-      mode: 0644
-      validate: 'visudo -cf %s'
+# YAY 🎆
+    - name: disable need for password for pacman to allow yay install
+      lineinfile:
+        path: /etc/sudoers.d/temp_allow_no_pswd_pacman
+        state: present
+        line: "ALL ALL=NOPASSWD: /usr/bin/pacman"
+        validate: /usr/sbin/visudo -cf %s
+        create: yes
 
-# Install Packages from Base
-  - name: Install Base Arch Pkgs
-    pacman:
-      update_cache: yes
-      name:
-        - audacious
-        - cups
-        - cups-pdf
-        - curl
-        - delve
-        - dosfstools
-        - eza
-        - fastfetch
-        - fish
-        - gnome-browser-connector
-        - gnome-tweaks
-        - go
-        - grub-btrfs
-        - helix
-        - hydra
-        - john
-        - kitty
-        - libreoffice-still
-        - lldb
-        - marksman
-        - mpv
-        - net-tools
-        - nmap        
-        - ntfs-3g
-        - openssh
-        - openvpn
-        - putty
-        - qbittorrent
-        - remmina
-        - ripgrep
-        - ruff
-        - signal-desktop
-        - speedtest-cli
-        - starship
-        - stow
-        - timeshift
-        - vscode-json-languageserver
-        - wget
-        - yt-dlp
-        - wezterm
-        - wireshark-qt
-        - yazi
-        - zellij
+    - name: git clone yay-bin repo in to /tmp
+      become: no
+      git:
+        repo: 'https://aur.archlinux.org/yay-bin.git'
+        dest: /tmp/yay-bin
+        clone: yes
+
+    - name: install yay using makepkg
+      become: no
+      expect:
+        chdir: /tmp/yay-bin
+        command: makepkg -si
+        responses:
+          (?i)Proceed with installation: "y"
+
+    - name: re-enable need for password for pacman
+      file:
+        path: /etc/sudoers.d/temp_allow_no_pswd_pacman
+        state: absent
+
+    - name: set yay options to cleanafter package installation
+      become: no
+      shell: yay -Y --answerclean All --removemake --cleanafter --save
+      args:
+        executable: /usr/bin/bash
 
 # Install packages from the AUR
-  - name: Install AUR pkgs
-    become: true
-    become_user: aur_builder
-    kewlfft.aur.aur:
-      use: yay
-      name:
-        - brave-bin
-        - brlaser
-        - ffuf-bin
-        - gnome-shell-extension-appindicator-git
-        - gnome-shell-extension-wallpaper-slideshow
-        - gobuster-bin
-        - golangci-lint
-        - markdown-oxide-git
-        - microsoft-edge-stable-bin
-        - simplex-desktop-appimage
-        - sshs-bin
-        - synology-drive
-        - timeshift-autosnap
-        - ttf-firacode
-        - ttf-firacode-nerd
-        - ttf-iosevka
-        - ttf-iosevka-aile
-      state: present
+    - name: Install AUR pkgs
+      become: true
+      become_user: aur_builder
+      kewlfft.aur.aur:
+        use: yay
+        name:
+          - brave-bin
+          - brlaser
+          - ffuf-bin
+          - gnome-shell-extension-appindicator-git
+          - gnome-shell-extension-wallpaper-slideshow
+          - gobuster-bin
+          - golangci-lint
+          - markdown-oxide-git
+          - microsoft-edge-stable-bin
+          - ppd-toshiba-estudio5560c
+          - simplex-desktop-appimage
+          - sshs-bin
+          - synology-drive
+          - timeshift-autosnap
+          - ttf-firacode
+          - ttf-firacode-nerd
+          - ttf-iosevka
+          - ttf-iosevka-aile
+        state: present
 
 # Change Shell
-  - name: Change to FISH Shell
-    become: yes
-    user:
-      name: "hacky"
-      shell: /bin/fish
+    - name: Change to FISH Shell
+      become: yes
+      user:
+        name: "hacky"
+        shell: /bin/fish
+
+# SSH
+    - name: SSH
+      pacman:
+        name:
+          - openssh-openrc
+
+    - name: enable and start ssh
+      openrc:
+        name: sshd
+        enabled: yes
+        state: started
+
+# GIT CONFIG
+    - name: Git email
+      community.general.git_config:
+        name: user.email
+        repo: /etc
+        scope: local
+        value: 'jon@hacky.pro'
+
+    - name: Git username
+      community.general.git_config:
+        name: user.username
+        repo: /etc
+        scope: local
+        value: 'jon'
