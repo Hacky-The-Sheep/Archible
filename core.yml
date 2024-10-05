@@ -11,6 +11,22 @@
         update_cache: yes
         upgrade: yes
 
+# Create the AUR User
+    - name: Create the `aur_builder` user
+      become: yes
+      ansible.builtin.user:
+        name: aur_builder
+        create_home: yes
+        group: wheel
+
+    - name: Allow the `aur_builder` user to run `sudo pacman` without a password
+      become: yes
+      ansible.builtin.lineinfile:
+        path: /etc/sudoers.d/11-install-aur_builder
+        line: 'aur_builder ALL=(ALL) NOPASSWD: /usr/bin/pacman'
+        create: yes
+        mode: 0644
+
 # Install Pkgs
     - name: Install Base Arch Pkgs
       pacman:
@@ -26,6 +42,7 @@
           - eza
           - fastfetch
           - fish
+          - fragments
           - gnome-browser-connector
           - gnome-tweaks
           - go
@@ -43,11 +60,14 @@
           - ntfs-3g
           - openssh
           - openvpn
+          - python
+          - python-pexpect
           - putty
           - qbittorrent
           - remmina
           - ripgrep
           - ruff
+          - rust
           - signal-desktop
           - speedtest-cli
           - starship
@@ -63,41 +83,6 @@
           - yazi
           - zellij
 
-# YAY 🎆
-    - name: disable need for password for pacman to allow yay install
-      lineinfile:
-        path: /etc/sudoers.d/temp_allow_no_pswd_pacman
-        state: present
-        line: "ALL ALL=NOPASSWD: /usr/bin/pacman"
-        validate: /usr/sbin/visudo -cf %s
-        create: yes
-
-    - name: git clone yay-bin repo in to /tmp
-      become: no
-      git:
-        repo: 'https://aur.archlinux.org/yay-bin.git'
-        dest: /tmp/yay-bin
-        clone: yes
-
-    - name: install yay using makepkg
-      become: no
-      expect:
-        chdir: /tmp/yay-bin
-        command: makepkg -si
-        responses:
-          (?i)Proceed with installation: "y"
-
-    - name: re-enable need for password for pacman
-      file:
-        path: /etc/sudoers.d/temp_allow_no_pswd_pacman
-        state: absent
-
-    - name: set yay options to cleanafter package installation
-      become: no
-      shell: yay -Y --answerclean All --removemake --cleanafter --save
-      args:
-        executable: /usr/bin/bash
-
 # Install packages from the AUR
     - name: Install AUR pkgs
       become: true
@@ -112,7 +97,6 @@
           - gnome-shell-extension-wallpaper-slideshow
           - gobuster-bin
           - golangci-lint
-          - markdown-oxide-git
           - microsoft-edge-stable-bin
           - ppd-toshiba-estudio5560c
           - simplex-desktop-appimage
@@ -136,25 +120,10 @@
     - name: SSH
       pacman:
         name:
-          - openssh-openrc
+          - openssh
 
     - name: enable and start ssh
-      openrc:
+      systemd:
         name: sshd
         enabled: yes
         state: started
-
-# GIT CONFIG
-    - name: Git email
-      community.general.git_config:
-        name: user.email
-        repo: /etc
-        scope: local
-        value: 'jon@hacky.pro'
-
-    - name: Git username
-      community.general.git_config:
-        name: user.username
-        repo: /etc
-        scope: local
-        value: 'jon'
