@@ -42,6 +42,7 @@
           - eza
           - fastfetch
           - fish
+          - fragments
           - go
           - grub-btrfs
           - helix
@@ -53,6 +54,7 @@
           - marksman
           - mpv
           - net-tools
+          - nix
           - nmap        
           - ntfs-3g
           - openssh
@@ -60,7 +62,6 @@
           - python
           - python-pexpect
           - putty
-          - qbittorrent
           - remmina
           - ripgrep
           - rhythmbox
