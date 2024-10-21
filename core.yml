@@ -106,6 +106,7 @@
           - ttf-firacode-nerd
           - ttf-iosevka
           - ttf-iosevka-aile
+          - zen-browser-bin
         state: present
 
 # Change Shell
