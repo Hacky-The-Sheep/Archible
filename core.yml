@@ -67,6 +67,7 @@
           - rhythmbox
           - ruff
           - rust
+          - screen
           - signal-desktop
           - speedtest-cli
           - starship
@@ -106,7 +107,6 @@
           - ttf-firacode-nerd
           - ttf-iosevka
           - ttf-iosevka-aile
-          - zen-browser-bin
         state: present
 
 # Change Shell
