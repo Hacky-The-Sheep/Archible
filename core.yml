@@ -90,6 +90,7 @@
       kewlfft.aur.aur:
         use: yay
         name:
+          - banana-cursor-bin
           - brave-bin
           - brlaser
           - ffuf-bin
@@ -102,6 +103,7 @@
           - simplex-desktop-appimage
           - sshs-bin
           - synology-drive
+          - tela-icon-theme-bin
           - timeshift-autosnap
           - ttf-firacode
           - ttf-firacode-nerd
