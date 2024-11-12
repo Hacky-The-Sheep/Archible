@@ -43,6 +43,7 @@
           - fastfetch
           - fish
           - fragments
+          - freerdp
           - go
           - grub-btrfs
           - helix
@@ -103,7 +104,6 @@
           - simplex-desktop-appimage
           - sshs-bin
           - synology-drive
-          - tela-icon-theme-bin
           - timeshift-autosnap
           - ttf-firacode
           - ttf-firacode-nerd
