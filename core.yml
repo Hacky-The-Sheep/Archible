@@ -73,6 +73,7 @@
           - speedtest-cli
           - starship
           - stow
+          - tailscale
           - timeshift
           - tldr
           - unzip
