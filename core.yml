@@ -45,6 +45,7 @@
           - fragments
           - freerdp
           - go
+          - gopls
           - grub-btrfs
           - helix
           - hydra
@@ -100,6 +101,7 @@
           - gnome-shell-extension-wallpaper-slideshow
           - gobuster-bin
           - golangci-lint
+          - golangci-lint-langserver-bin
           - microsoft-edge-stable-bin
           - ppd-toshiba-estudio5560c
           - simplex-desktop-appimage
