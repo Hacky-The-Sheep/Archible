@@ -69,6 +69,7 @@
           - rhythmbox
           - ruff
           - rust
+          - rust-analyzer
           - screen
           - signal-desktop
           - speedtest-cli
