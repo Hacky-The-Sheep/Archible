@@ -61,7 +61,9 @@
           - ntfs-3g
           - openssh
           - openvpn
+          - pyright
           - python
+          - python-lsp-server
           - python-pexpect
           - putty
           - remmina
