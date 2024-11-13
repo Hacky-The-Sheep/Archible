@@ -115,6 +115,7 @@
           - ttf-firacode-nerd
           - ttf-iosevka
           - ttf-iosevka-aile
+          - vscode-css-languageserver
           - vscode-html-languageserver
         state: present
 
