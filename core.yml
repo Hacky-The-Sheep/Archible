@@ -44,13 +44,13 @@
           - fish
           - fragments
           - freerdp
+          - ghostty
           - go
           - gopls
           - grub-btrfs
           - helix
           - hydra
           - john
-          - kitty
           - libreoffice-still
           - lldb
           - marksman
@@ -87,7 +87,6 @@
           - yt-dlp
           - wireshark-qt
           - yazi
-          - zellij
 
 # Install packages from the AUR
     - name: Install AUR pkgs
@@ -98,7 +97,6 @@
         name:
           - banana-cursor-bin
           - brave-bin
-          - brlaser
           - ffuf-bin
           - gnome-shell-extension-appindicator-git
           - gnome-shell-extension-wallpaper-slideshow
